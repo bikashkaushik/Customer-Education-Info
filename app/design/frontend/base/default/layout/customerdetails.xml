@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<!--adding new link to  Customer Myaccount links--> 
+    <customer_account>        
+        <reference name="customer_account_navigation">           
+		    <action method="addLink" module="Bk_Customerdetails">
+		        <name>Additional Details</name>
+				<path>customerdetails/extended/info</path>
+				<label>Additional Details</label>
+		    </action>
+		</reference>
+    </customer_account>	
+    <!-- adding collection page block to customer myaccount-->
+	
+	<customerdetails_extended_info>
+       <reference name="my.account.wrapper">
+            <block type="customerdetails/extended_info" name="customer.extended.info"  as="customer_extended_info" template="bkcustomerdetails/form.phtml" />
+            <!-- <block type="customer/form_edit" name="customer.extended.info"  as="customer_extended_info" template="bkcustomerdetails/form.phtml" /> -->
+        </reference>
+    </customerdetails_extended_info>
+
+</layout>

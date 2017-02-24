@@ -1,0 +1,269 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+  $customerId = $this->getCustomerId();
+  $customerInfo = $this->getCustomerInfo();
+  //echo "<pre>";print_r($customerInfo->getMatriculationYear());
+  
+  $matric_year = array();
+  for ($i=1991; $i <= 2021; $i++) { 
+      if($i == $customerInfo->getMatriculationYear())
+        $matric_year[] = '<option selected value="'.$i.'">'.$i.'</option>';
+      $matric_year[] = '<option value="'.$i.'">'.$i.'</option>';
+  }
+
+  $intermediate_year = array();
+  for ($i=1991; $i <= 2021; $i++) { 
+      if($i == $customerInfo->getIntermediateYear())
+        $intermediate_year[] = '<option selected value="'.$i.'">'.$i.'</option>';
+      $intermediate_year[] = '<option value="'.$i.'">'.$i.'</option>';
+  }
+
+  $graduation_year = array();
+  for ($i=1991; $i <= 2021; $i++) { 
+      if($i == $customerInfo->getGraduationYear())
+        $graduation_year[] = '<option selected value="'.$i.'">'.$i.'</option>';
+      $graduation_year[] = '<option value="'.$i.'">'.$i.'</option>';
+  }
+
+  $pgraduation_year = array();
+  for ($i=1991; $i <= 2021; $i++) { 
+      if($i == $customerInfo->getPgraduationYear())
+        $pgraduation_year[] = '<option selected value="'.$i.'">'.$i.'</option>';
+      $pgraduation_year[] = '<option value="'.$i.'">'.$i.'</option>';
+  }
+//print_r($customerInfo->getIntermediateYear());
+
+      // $customerInfo->setData('matriculation_year',5000);
+      // $customerInfo->save();
+ ?>
+
+
+
+<div class="page-title">
+    <h1><?php echo $this->__('Additional Information'); ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<form action="<?php echo $this->getUrl('customerdetails/extended/saveExtendedInfo') ?>" method="post" id="form-validate" autocomplete="off">
+    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    <input type="hidden" name="entity_id" id="entity_id" value="<?php echo $customerId; ?>" />
+    <div class="fieldset">
+        <?php //echo $this->getBlockHtml('formkey')?>
+        <h2 class="legend"><?php echo $this->__('Matriculation') ?></h2>
+        <ul class="form-list">
+            <li>
+                <label for="matriculation_year" class="required"><em>*</em><?php echo $this->__('Matriculation Year') ?></label>
+                <div class="input-box">
+                    <select style="" class="validate-select required-entry" title="Matriculation Year" name="matriculation_year" id="matriculation_year" defaultvalue="0">
+                           <option value="">Please select year of completion</option>
+                           <?php
+                              foreach ($matric_year as $options) {
+                                echo $options;
+                              }
+                           ?>
+                    </select>
+                </div>
+            </li>
+            <li>
+            	<label for="matriculation_school" class="required"><em>*</em><?php echo $this->__('School') ?></label>
+	            <div>
+	            	<input type="text" name="matriculation_school" id="matriculation_school" value="<?php echo $customerInfo->getMatriculationSchool() ?>" title="<?php echo $this->__('Matriculation School') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="matriculation_city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+	            <div>
+	            	<input type="text" name="matriculation_city" id="matriculation_city" value="<?php echo $customerInfo->getMatriculationCity() ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="matriculation_stream" class="required"><em>*</em><?php echo $this->__('Stream') ?></label>
+	            <div>
+	            	<input type="text" name="matriculation_stream" id="matriculation_stream" value="<?php echo $customerInfo->getMatriculationStream() ?>" title="<?php echo $this->__('Stream') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="matriculation_marks" class="required"><em>*</em><?php echo $this->__('Marks/Grade') ?></label>
+	            <div>
+	            	<input type="text" name="matriculation_marks" id="matriculation_marks" value="<?php echo $customerInfo->getMatriculationMarks() ?>" title="<?php echo $this->__('Marks/Grade') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <?php //echo $this->getBlockHtml('formkey')?>
+        <h2 class="legend"><?php echo $this->__('Intermediate') ?></h2>
+        <ul class="form-list">
+            <li>
+                <label for="intermediate_year" class="required"><em>*</em><?php echo $this->__('Intermediate Year') ?></label>
+                <div class="input-box">
+                    <select style="" class="validate-select required-entry" title="Intermediate Year" name="intermediate_year" id="intermediate_year" defaultvalue="0">
+                           <option value="">Please select year of completion</option>
+                           <?php
+                              foreach ($intermediate_year as $options) {
+                                echo $options;
+                              }
+                           ?>
+                    </select>
+                </div>
+            </li>
+            <li>
+            	<label for="intermediate_school" class="required"><em>*</em><?php echo $this->__('School/Institute') ?></label>
+	            <div>
+	            	<input type="text" name="intermediate_school" id="intermediate_school" value="<?php echo $customerInfo->getIntermediateSchool() ?>" title="<?php echo $this->__('Intermediate Institute') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="intermediate_city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+	            <div>
+	            	<input type="text" name="intermediate_city" id="intermediate_city" value="<?php echo $customerInfo->getIntermediateCity() ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="intermediate_stream" class="required"><em>*</em><?php echo $this->__('Stream') ?></label>
+	            <div>
+	            	<input type="text" name="intermediate_stream" id="intermediate_stream" value="<?php echo $customerInfo->getIntermediateStream() ?>" title="<?php echo $this->__('Stream') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="intermediate_marks" class="required"><em>*</em><?php echo $this->__('Marks/Grade') ?></label>
+	            <div>
+	            	<input type="text" name="intermediate_marks" id="intermediate_marks" value="<?php echo $customerInfo->getIntermediateMarks() ?>" title="<?php echo $this->__('Marks/Grade') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <?php //echo $this->getBlockHtml('formkey')?>
+        <h2 class="legend"><?php echo $this->__('Graduation') ?></h2>
+        <ul class="form-list">
+            <li>
+                <label for="graduation_year" class="required"><em>*</em><?php echo $this->__('Graduation Year') ?></label>
+                <div class="input-box">
+                    <select style="" class="validate-select required-entry" title="Graduation Year" name="graduation_year" id="graduation_year" defaultvalue="0">
+                           <option value="">Please select year of completion</option>
+                           <?php
+                              foreach ($graduation_year as $options) {
+                                echo $options;
+                              }
+                           ?>
+                    </select>
+                </div>
+            </li>
+            <li>
+            	<label for="graduation_institute" class="required"><em>*</em><?php echo $this->__('Graduation College/Institute') ?></label>
+	            <div>
+	            	<input type="text" name="graduation_institute" id="graduation_institute" value="<?php echo $customerInfo->getGraduationCollege() ?>" title="<?php echo $this->__('Graduation College/Institute') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="graduation_university" class="required"><em>*</em><?php echo $this->__('Graduation University') ?></label>
+	            <div>
+	            	<input type="text" name="graduation_university" id="graduation_university" value="<?php echo $customerInfo->getGraduationUniversity() ?>" title="<?php echo $this->__('Graduation University') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="graduation_city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+	            <div>
+	            	<input type="text" name="graduation_city" id="graduation_city" value="<?php echo $customerInfo->getGraduationCity() ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="graduation_stream" class="required"><em>*</em><?php echo $this->__('Stream') ?></label>
+	            <div>
+	            	<input type="text" name="graduation_stream" id="graduation_stream" value="<?php echo $customerInfo->getGraduationStream() ?>" title="<?php echo $this->__('Stream') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="graduation_marks" class="required"><em>*</em><?php echo $this->__('Marks/Grade') ?></label>
+	            <div>
+	            	<input type="text" name="graduation_marks" id="graduation_marks" value="<?php echo $customerInfo->getGraduationMarks() ?>" title="<?php echo $this->__('Marks/Grade') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+        </ul>
+    </div>
+    <div class="fieldset">
+        <?php //echo $this->getBlockHtml('formkey')?>
+        <h2 class="legend"><?php echo $this->__('Post Graduation') ?></h2>
+        <ul class="form-list">
+            <li>
+                <label for="pgraduation_year" class="required"><em>*</em><?php echo $this->__('Post Graduation Year') ?></label>
+                <div class="input-box">
+                    <select style="" class="validate-select required-entry" title="Post Graduation Year" name="pgraduation_year" id="pgraduation_year" defaultvalue="0">
+                           <option value="">Please select year of completion</option>
+                           <?php
+                              foreach ($pgraduation_year as $options) {
+                                echo $options;
+                              }
+                           ?>
+                    </select>
+                </div>
+            </li>
+            <li>
+            	<label for="pgraduation_institute" class="required"><em>*</em><?php echo $this->__('Post Graduation College/Institute') ?></label>
+	            <div>
+	            	<input type="text" name="pgraduation_institute" id="pgraduation_institute" value="<?php echo $customerInfo->getPgraduationCollege() ?>" title="<?php echo $this->__('Post Graduation College/Institute') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="pgraduation_university" class="required"><em>*</em><?php echo $this->__('Post Graduation University') ?></label>
+	            <div>
+	            	<input type="text" name="pgraduation_university" id="pgraduation_university" value="<?php echo $customerInfo->getPgraduationUniversity() ?>" title="<?php echo $this->__('PostGraduation University') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="pgraduation_city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+	            <div>
+	            	<input type="text" name="pgraduation_city" id="pgraduation_city" value="<?php echo $customerInfo->getPgraduationCity() ?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="pgraduation_stream" class="required"><em>*</em><?php echo $this->__('Stream') ?></label>
+	            <div>
+	            	<input type="text" name="pgraduation_stream" id="pgraduation_stream" value="<?php echo $customerInfo->getPgraduationStream() ?>" title="<?php echo $this->__('Stream') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+            <li>
+            	<label for="pgraduation_marks" class="required"><em>*</em><?php echo $this->__('Marks/Grade') ?></label>
+	            <div>
+	            	<input type="text" name="pgraduation_marks" id="pgraduation_marks" value="<?php echo $customerInfo->getPgraduationMarks() ?>" title="<?php echo $this->__('Marks/Grade') ?>" class="input-text required-entry" />
+	            </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Save') ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+
+//]]>
+</script>
